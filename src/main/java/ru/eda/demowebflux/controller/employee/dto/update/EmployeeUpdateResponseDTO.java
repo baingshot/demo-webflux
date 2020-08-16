@@ -1,0 +1,37 @@
+package ru.eda.demowebflux.controller.employee.dto.update;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import ru.eda.demowebflux.domain.employee.Employee;
+
+@ApiModel(description = "Employee update response object, which contains response information")
+public class EmployeeUpdateResponseDTO {
+    @ApiModelProperty(notes = "Employee id")
+    private final Long id;
+
+    @ApiModelProperty(notes = "Employee name")
+    private final String name;
+
+    public static EmployeeUpdateResponseDTO of(Employee employee) {
+        return new EmployeeUpdateResponseDTO(
+                employee.getId(),
+                employee.getName()
+        );
+    }
+
+    public EmployeeUpdateResponseDTO(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @JsonGetter("id")
+    public Long getId() {
+        return id;
+    }
+
+    @JsonGetter("name")
+    public String getName() {
+        return name;
+    }
+}
