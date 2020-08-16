@@ -1,12 +1,12 @@
-package ru.eda.demowebflux.controller.employee.dto.create;
+package ru.eda.demowebflux.controller.employee.dto.get;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import ru.eda.demowebflux.domain.employee.Employee;
 
-@ApiModel(description = "Employee create response object, which contains response information")
-public class EmployeeCreateResponseDTO {
+@ApiModel(description = "Employee get response object, which contains response information")
+public class EmployeeGetResponseDTO {
 
     @ApiModelProperty(notes = "Employee id")
     private final Long id;
@@ -14,14 +14,14 @@ public class EmployeeCreateResponseDTO {
     @ApiModelProperty(notes = "Employee name")
     private final String name;
 
-    public static EmployeeCreateResponseDTO of(Employee employee) {
-        return new EmployeeCreateResponseDTO(
+    public static EmployeeGetResponseDTO of(Employee employee) {
+        return new EmployeeGetResponseDTO(
                 employee.getId(),
                 employee.getName()
         );
     }
 
-    public EmployeeCreateResponseDTO(Long id, String name) {
+    public EmployeeGetResponseDTO(Long id, String name) {
         this.id = id;
         this.name = name;
     }

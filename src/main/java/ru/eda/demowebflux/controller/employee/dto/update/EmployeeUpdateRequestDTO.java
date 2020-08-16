@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 
 @ApiModel(description = "Employee update request object, which contains request information")
 public class EmployeeUpdateRequestDTO {
+
     @NotNull
     @Positive
     @ApiModelProperty(notes = "Employee id")

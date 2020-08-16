@@ -7,6 +7,7 @@ import ru.eda.demowebflux.domain.employee.Employee;
 
 @ApiModel(description = "Employee update response object, which contains response information")
 public class EmployeeUpdateResponseDTO {
+
     @ApiModelProperty(notes = "Employee id")
     private final Long id;
 
