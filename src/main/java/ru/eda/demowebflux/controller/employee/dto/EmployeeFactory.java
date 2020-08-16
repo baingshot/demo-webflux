@@ -4,16 +4,24 @@ import ru.eda.demowebflux.controller.employee.dto.create.EmployeeCreateRequestDT
 import ru.eda.demowebflux.controller.employee.dto.update.EmployeeUpdateRequestDTO;
 import ru.eda.demowebflux.domain.employee.Employee;
 
-public final class EmployeeFactory {
-    private EmployeeFactory() {
+import java.util.Optional;
 
+public final class EmployeeFactory {
+
+    private EmployeeFactory() {
     }
 
     public static Employee from(EmployeeCreateRequestDTO createRequestDTO) {
-        return new Employee(createRequestDTO.getName());
+        return Optional.ofNullable(createRequestDTO)
+                .map(EmployeeCreateRequestDTO::getName)
+                .map(Employee::new)
+                .orElse(null);
     }
 
     public static Employee from(EmployeeUpdateRequestDTO updateRequestDTO) {
-        return new Employee(updateRequestDTO.getName());
+        return Optional.ofNullable(updateRequestDTO)
+                .map(EmployeeUpdateRequestDTO::getName)
+                .map(Employee::new)
+                .orElse(null);
     }
 }

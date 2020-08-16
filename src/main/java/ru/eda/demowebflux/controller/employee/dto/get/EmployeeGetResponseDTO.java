@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import ru.eda.demowebflux.domain.employee.Employee;
 
+import java.util.Optional;
+
 @ApiModel(description = "Employee get response object, which contains response information")
 public class EmployeeGetResponseDTO {
 
@@ -15,10 +17,12 @@ public class EmployeeGetResponseDTO {
     private final String name;
 
     public static EmployeeGetResponseDTO of(Employee employee) {
-        return new EmployeeGetResponseDTO(
-                employee.getId(),
-                employee.getName()
-        );
+        return Optional.ofNullable(employee)
+                .map(empl -> new EmployeeGetResponseDTO(
+                        empl.getId(),
+                        empl.getName()
+                ))
+                .orElse(null);
     }
 
     public EmployeeGetResponseDTO(Long id, String name) {

@@ -5,8 +5,12 @@ import org.springframework.stereotype.Service;
 import ru.eda.demowebflux.domain.employee.Employee;
 import ru.eda.demowebflux.repository.employee.EmployeeRepository;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class EmployeeService {
+
+    private static final String EMPLOYEE_NOT_FOUND = "Employee with id: %d was not found";
 
     private final EmployeeRepository employeeRepository;
 
@@ -20,7 +24,9 @@ public class EmployeeService {
     }
 
     public Employee getById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+        return employeeRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format(EMPLOYEE_NOT_FOUND,id))
+        );
     }
 
     public Employee update(Employee employee) {
@@ -28,6 +34,9 @@ public class EmployeeService {
     }
 
     public void deleteById(Long id) {
+        if (!employeeRepository.existsById(id)) {
+            throw new EntityNotFoundException(String.format(EMPLOYEE_NOT_FOUND,id));
+        }
         employeeRepository.deleteById(id);
     }
 
